@@ -12,6 +12,7 @@ type Post {
     created_at: DateTime!
     updated_at: DateTime!
     author: Author! @belongsTo
+    tags: [Tag] @belongsToMany
 }
 
 type Author {
@@ -22,12 +23,24 @@ type Author {
     bio: String!
     created_at: DateTime!
     updated_at: DateTime!
-    posts: [Post!] @hasMany
+    posts: [Post!]! @hasMany
+}
+
+type Tag  {
+    id: ID!
+    slug: String!
+    name: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+    posts: [Post] @belongsToMany
 }
 
 type Query {
     post(id: String @eq): Post @find
-    posts: [Post] @paginate(defaultCount: 10)
 
-    authors: [Author] @all
+    posts: [Post!]! @paginate(defaultCount: 10)
+
+    authors: [Author!]! @paginate(defaultCount: 10)
+
+    tags: [Tag!]! @paginate(defaultCount: 10)
 }

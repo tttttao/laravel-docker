@@ -2,19 +2,8 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Wink\WinkPost;
 
-class Post extends Model
+class Post extends WinkPost
 {
-    protected $table = 'wink_posts';
-
-    public $incrementing = false;
-
-    public function author()
-    {
-        return $this->belongsTo(Author::class);
-    }
 }
